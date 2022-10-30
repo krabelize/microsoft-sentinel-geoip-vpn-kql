@@ -1,0 +1,15 @@
+//Cryptsus.com - we craft cyber security solutions
+//Date: 20-09-2022
+//Load Maxwind GeoIP database in Sentinel
+let GeoIPDB = _GetWatchlist("GeoIPCountry");
+//Filter on successful VPN sessions
+let VPN = PulseConnectSecure
+ | where EventResult == "success"
+ | distinct Source_IP, User
+ | project VPN_IP = Source_IP, User;
+//Translate IPv4 addresses to GeoIP based country names
+VPN
+ | evaluate ipv4_lookup(GeoIPDB, VPN_IP, network)
+ | where country_code != "NL"
+ | summarize count() by User, country_code
+ | sort by count_
