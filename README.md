@@ -1,0 +1,1 @@
+# microsoft-sentinel-geoip-vpn-kql
