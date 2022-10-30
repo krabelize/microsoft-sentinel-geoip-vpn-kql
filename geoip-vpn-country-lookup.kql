@@ -1,5 +1,5 @@
 //Cryptsus.com - we craft cyber security solutions
-//Date: 20-09-2022
+//Date: 30-10-2022
 //Load Maxwind GeoIP database in Sentinel
 let GeoIPDB = _GetWatchlist("GeoIPCountry");
 //Filter on successful VPN sessions
