@@ -2,7 +2,7 @@
 
 **GeoIP VPN source IP match Country Detection with Microsoft Sentinel KQL**
 
-Read [this article](https://cryptsus.com/blog/azure-mfa-bombing-detection-sentinel.html) for more information.
+Read [this article](https://cryptsus.com/blog/enrich-geolocation-sentinel-siem.html) for more information.
 
 # License
 Berkeley Software Distribution (BSD)
