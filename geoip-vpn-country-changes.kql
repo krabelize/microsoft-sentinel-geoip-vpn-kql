@@ -1,0 +1,14 @@
+//Load Maxwind GeoIP database in Sentinel
+let GeoIPDB = _GetWatchlist("GeoIPCountry");
+//Filter on successful VPN sessions
+let VPN = PulseConnectSecure
+ | where EventResult == "success"
+ | distinct Source_IP, User
+ | project VPN_IP = Source_IP, User;
+//Translate IPv4 addresses to GeoIP-based country names
+VPN
+ | evaluate ipv4_lookup(GeoIPDB, VPN_IP, network)
+ | where country_code != "NL"
+ | summarize ['Geo_locations']=make_list(country_name), ['Geo_changes']=count() by User
+ | where ['Geo_changes'] > 1
+ | sort by Geo_changes
