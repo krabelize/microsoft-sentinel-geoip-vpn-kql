@@ -7,7 +7,7 @@ let VPN = PulseConnectSecure
  | project VPN_IP = Source_IP, User;
 //Translate IPv4 addresses to GeoIP-based country names
 VPN
- | evaluate ipv4_lookup(GeoIPDB, VPN_IP, network)
+ | evaluate ipv4_lookup(GeoIPDB, VPN_IP, network, return_unmatched = true)
  | where country_code != "NL"
  | summarize ['Geo_locations']=make_list(country_name), ['Geo_changes']=count() by User
  | where ['Geo_changes'] > 1
